@@ -23,10 +23,13 @@ function AllPosts() {
     </div>
   ));
 
-  if (length === 0) {
-    history.push('/');
-    return null;
-  }
+  React.useEffect(() => {
+    if (length === 0) {
+      history.push('/');
+    }
+  }, [length, history]);
+
+  if (length === 0) return null;
 
   return (
     <div className="allPostsPage">
