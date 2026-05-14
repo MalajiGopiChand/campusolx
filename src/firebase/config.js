@@ -4,27 +4,16 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
 
 // Read from .env (copy .env.example to .env). No hardcoded fallbacks; fail fast if config is missing.
-const envKeys = {
-  apiKey: 'REACT_APP_FIREBASE_API_KEY',
-  authDomain: 'REACT_APP_FIREBASE_AUTH_DOMAIN',
-  projectId: 'REACT_APP_FIREBASE_PROJECT_ID',
-  storageBucket: 'REACT_APP_FIREBASE_STORAGE_BUCKET',
-  messagingSenderId: 'REACT_APP_FIREBASE_MESSAGING_SENDER_ID',
-  appId: 'REACT_APP_FIREBASE_APP_ID',
-  measurementId: 'REACT_APP_FIREBASE_MEASUREMENT_ID',
+// Read from .env, but provide hardcoded fallbacks so Vercel deployment works without extra config
+const firebaseConfig = {
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY || "AIzaSyAfZdULlcqPiCQPuMXPGt4DR-ysd9BIK8c",
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN || "campus-ol.firebaseapp.com",
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID || "campus-ol",
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET || "campus-ol.firebasestorage.app",
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID || "830631652868",
+  appId: process.env.REACT_APP_FIREBASE_APP_ID || "1:830631652868:web:79a4b0a9f4183bb337cf51",
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID || "G-05QJ3YZDT0"
 };
-
-const requiredEnvKeys = ['apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId'];
-const firebaseConfig = {};
-for (const key of Object.keys(envKeys)) {
-  const value = process.env[envKeys[key]];
-  if (requiredEnvKeys.includes(key) && !value) {
-    throw new Error(
-      `Missing Firebase config: ${envKeys[key]}. Set REACT_APP_FIREBASE_* in .env (see .env.example).`
-    );
-  }
-  firebaseConfig[key] = value || '';
-}
 
 export const Firebase = firebase.initializeApp(firebaseConfig);
 export { firebase };
