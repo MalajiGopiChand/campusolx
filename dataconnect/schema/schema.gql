@@ -1,0 +1,40 @@
+type User @table {
+  displayName: String!
+  email: String!
+  universityID: String!
+  createdAt: Timestamp!
+  phoneNumber: String
+  photoURL: String
+}
+
+type Category @table {
+  name: String!
+}
+
+type Item @table {
+  title: String!
+  description: String!
+  price: Float!
+  createdAt: Timestamp!
+  status: String!
+  condition: String
+  imageUrls: [String]
+  meetingLocationSuggestion: String
+  seller: User
+  category: Category
+}
+
+type Message @table {
+  content: String!
+  createdAt: Timestamp!
+  readAt: Timestamp
+  sender: User
+  receiver: User
+  item: Item
+}
+
+type WatchlistItem @table {
+  createdAt: Timestamp!
+  user: User
+  item: Item
+}
