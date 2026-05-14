@@ -24,8 +24,9 @@ export function handleSocialSignUp(providerName, provider, { setLoading, setErro
     })
     .catch((error) => {
       setLoading(false);
+      console.error('Social signup error:', error);
       setErrors({
-        form: 'Something went wrong. Please try again.',
+        form: error.message || 'Something went wrong. Please try again.',
       });
     });
 }
@@ -69,6 +70,7 @@ export function handleSubmit(e, { name, email, phone, password, termsAccepted, s
     })
     .catch((error) => {
       setLoading(false);
-      setErrors({ form: 'Something went wrong. Please try again.' });
+      console.error('Signup error:', error);
+      setErrors({ form: error.message || 'Something went wrong. Please try again.' });
     });
 }

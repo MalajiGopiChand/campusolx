@@ -37,7 +37,8 @@ function Login() {
       })
       .catch((error) => {
         setLoading(false);
-        setErrors({ form: 'Something went wrong. Please try again.' });
+        console.error('Social login error:', error);
+        setErrors({ form: error.message || 'Something went wrong. Please try again.' });
       });
   };
 
@@ -66,7 +67,8 @@ function Login() {
       })
       .catch((error) => {
         setLoading(false);
-        setErrors({ form: 'Something went wrong. Please try again.' });
+        console.error('Login error:', error);
+        setErrors({ form: error.message || 'Something went wrong. Please try again.' });
       });
   };
 
